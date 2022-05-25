@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+    <!--TODO: justify the content of the table and add user form for filtering data -->
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Wojewodztwo</th>
+                <th scope="col">Powiat</th>
+                <th scope="col">Liczba szkol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student: ${students}">
+                <td th:text="${student.getWojewodztwo()}"/>
+                <td th:text="${student.getPowiat}"/>
+                <td th:text="${student.getLiczbaSzkol}"/>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
