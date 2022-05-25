@@ -7,6 +7,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#wojewodztwo').bind('change', function(){
+
+            $('#powiat option').remove();
+
+            switch($(this).val()) {
+                case '2':
+                    $('#powiat').append('<option value="0">---</option>');
+                    $('#powiat').append('<option value="201">bolesławiecki</option>');
+                    $('#powiat').append('<option value="202">dzierżoniowski</option>');
+                    $('#powiat').append('<option value="203">głogowski</option>');
+                    $('#powiat').append('<option value="204">górowski</option>');
+                    break;
+                case '4':
+                    $('#powiat').append('<option value="0">---</option>');
+                    $('#powiat').append('<option value="401">aleksandrowski</option>');
+                    $('#powiat').append('<option value="402">brodnicki</option>');
+                    break;
+                case '6':
+                    $('#powiat').append('<option value="0">000</option>');
+                    $('#powiat').append('<option value="601">bialski</option>');
+                    $('#powiat').append('<option value="602">biłgorajski</option>');
+                    break;
+            }
+
+
+
+        })
+    });
+</script>
+
 <style>
 
     .styled-table {
@@ -51,6 +84,13 @@
 </style>
 <body>
 <div class="container-lg bg-light">
+    <div class="px-4 py-5 mt-5 mb-2 text-center">
+        <img class="d-block mx-auto mb-4" src="https://seeklogo.com/images/S/spring-logo-9A2BC78AAF-seeklogo.com.png" alt="" width="80" height="80">
+        <h1 class="display-5 fw-bold">Przeglądarka informacji o ukraińskich uczniach</h1>
+        <div class="col-lg-8 mx-auto">
+            <p class="lead">Jest to aplikacja bazodanowa stworzna przy wykorzystaniu bazy danych MSSQL, środowiska InteliJ IDE, frameworka Spring. Ma ona na celu przefiltrowanie dostępnych publicznie danych o ukraińskich uczniach uczących się w polskich szkołach. Dant pochodzą z dane.gov.pl z dnia 15 maja.  </p>
+        </div>
+    </div>
     <div>
         <img class="image" src="https://samorzad.gov.pl/photo/d98952cf-376f-4bdc-bc4f-0c9167c6127c">
     </div>
@@ -58,7 +98,7 @@
         <form th:action="@{/}" method="get">
             <div class="form-group">
                 <label >Wybierz województwo</label>
-                <select  th:name="wojewodztwo"  class="form-control">
+                <select  th:name="wojewodztwo" id="wojewodztwo"  class="form-control">
                     <option value="0">---</option>
                     <option value="2">Dolnośląskie</option>
                     <option value="4">Kujawsko-Pomorskie</option>
@@ -67,10 +107,8 @@
                     <option value="10">Łódzkie</option>
                 </select>
                 <label >Wybierz powiat</label>
-                <select th:name="powiat"  class="form-control">
+                <select th:name="powiat" id="powiat" class="form-control">
                     <option value="0">---</option>
-                    <option value="201">Bolesławicki</option>
-                    <option value="Wrocławski">
                 </select>
             </div>
             <div class="form-group">
@@ -78,13 +116,17 @@
                 <select th:name="publicznosc" class="form-control">
                     <option value="0">---</option>
                     <option value="1">Publiczna</option>
-                    <option value="Niepubliczna">
+                    <option value="4">Niepubliczna</option>
+                    <option value="5">Niepubliczna szkoła artystyczna o uprawnieniach publicznej szkoły artystycznej</option>
                 </select>
                 <label >Wybierz rodzaj szkoly</label>
                 <select th:name="podmiot" class="form-control">
                     <option value="0">---</option>
                     <option value="3">Szkoła Podstawowa</option>
-                    <option value="Gimnazjum">
+                    <option value="1">Przedszkole</option>
+                    <option value="14">Liceum ogólnokształczące</option>
+                    <option value="16">Technikum</option>
+
                 </select>
             </div>
             <div class="d-grid gap-2">
