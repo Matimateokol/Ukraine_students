@@ -18,10 +18,6 @@ go
 create user UserOdczyt for login UserOdczyt
 go
 
-grant select on Ukraina_Uczniowie to UserOdczyt
-deny select on Ukraina_Uczniowie to UserOdczyt
-
-
 --dodanie identity
 alter table Ukraina_Uczniowie
 add ID int Identity(1,1) not null
@@ -155,81 +151,18 @@ begin
 end
 grant exec on pokaz_szkoly_all to UserOdczyt
 deny exec on pokaz_szkoly_all to UserOdczyt
-exec pokaz_szkoly_all 0,0,0,0
+exec pokaz_szkoly_all 20,0,0,0
 go
---PROCEDURA SELECT TYLKO Z DANYMI KTORE POWINNY BYC DOSTEPNE DLA USERA
-create procedure pokaz_szkoly_all_NoID
-@idTerytWojewodztwo float, @idTerytPowiat float, @idPublicznosc float,  @idTypPodmiotu float
+--PROCEDURA SELECT DLA WOJEWODZTW
+
+create procedure pokaz_wojewodztwo
+@idTerytWojewodztwo float
 as
 begin
-	if @idTerytWojewodztwo=0 and @idTerytPowiat=0 and @idPublicznosc=0 and @idTypPodmiotu=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie
-		end
-	else if @idTerytWojewodztwo=0 and @idTerytPowiat=0 and @idPublicznosc=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTypPodmiotu=@idTypPodmiotu
-		end
-	else if @idTerytWojewodztwo=0 and @idTerytPowiat=0 and @idTypPodmiotu=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idPublicznosc=@idPublicznosc
-		end
-	else if @idTerytWojewodztwo=0 and @idTypPodmiotu=0 and @idPublicznosc=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTerytPowiat=@idTerytPowiat
-		end
-	else if  @idTerytPowiat=0 and @idPublicznosc=0 and @idTypPodmiotu=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTerytWojewodztwo=@idTerytWojewodztwo
-		end
-	else if @idTerytWojewodztwo=0 and @idTerytPowiat=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTypPodmiotu=@idTypPodmiotu and idPublicznosc=@idPublicznosc
-		end		
-	else if @idTerytWojewodztwo=0 and @idPublicznosc=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTypPodmiotu=@idTypPodmiotu and idTerytPowiat=@idTerytPowiat
-		end
-	else if @idTerytWojewodztwo=0 and @idTypPodmiotu=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTerytPowiat=@idTerytPowiat and idPublicznosc=@idPublicznosc
-		end
-	else if @idTerytPowiat=0 and @idPublicznosc=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTypPodmiotu=@idTypPodmiotu and idTerytWojewodztwo=@idTerytWojewodztwo
-		end
-	else if @idTerytPowiat=0 and @idTypPodmiotu=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idPublicznosc=@idPublicznosc and idTerytWojewodztwo=@idTerytWojewodztwo
-		end
-	else if @idPublicznosc=0 and @idTypPodmiotu=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTerytPowiat=@idTerytPowiat and idTerytWojewodztwo=@idTerytWojewodztwo
-		end
-	else if @idTerytWojewodztwo=0
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where  idTypPodmiotu=@idTypPodmiotu and idPublicznosc=@idPublicznosc and idTerytPowiat=@idTerytPowiat
-		end
-	else if @idTerytPowiat=0 
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where idPublicznosc=@idPublicznosc and idTypPodmiotu=@idTypPodmiotu and idTerytWojewodztwo=@idTerytWojewodztwo
-		end			
-	else if @idPublicznosc=0 
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where idTerytPowiat=@idTerytPowiat and idTypPodmiotu=@idTypPodmiotu and idTerytWojewodztwo=@idTerytWojewodztwo
-		end	
-	else if @idTypPodmiotu=0 
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where idPublicznosc=@idPublicznosc and idTerytPowiat=@idTerytPowiat and idTerytWojewodztwo=@idTerytWojewodztwo
-		end
-	else
-		begin
-			select Wojewodztwo, Powiat, Publicznosc, TypPodmiotu, LiczbaSzkol, Ukraincy, NaukaPolskiego from Ukraina_Uczniowie where idTerytWojewodztwo=@idTerytWojewodztwo and idTerytPowiat=@idTerytPowiat and idPublicznosc=@idPublicznosc and idTypPodmiotu=@idTypPodmiotu
-		end
+		select distinct idTerytWojewodztwo, Wojewodztwo, idTerytPowiat, Powiat from Ukraina_Uczniowie where idTerytWojewodztwo=@idTerytWojewodztwo
 end
 
-grant exec on pokaz_szkoly_all_NoID to UserOdczyt
+grant exec on pokaz_wojewodztwo to UserOdczyt
 
-
-exec pokaz_szkoly_all 0,0,0,0
-exec pokaz_szkoly_all_NoID 0,205,0,0
+drop procedure pokaz_wojewodztwo
+exec pokaz_wojewodztwo 2
