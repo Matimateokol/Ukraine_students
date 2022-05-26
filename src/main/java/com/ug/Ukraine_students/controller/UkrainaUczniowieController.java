@@ -39,5 +39,22 @@ public class UkrainaUczniowieController {
             @RequestParam(required = false) Integer podmiot) {
         return ukrainaUczniowieService.getAllByParams(wojewodztwo, powiat, publicznosc, podmiot);
     }
+    @GetMapping("/lista/wojewodztwo")
+    public List<UkrainaUczniowie> getListedByWojewodztwo() {
+        return ukrainaUczniowieService.getListedByWojewodztwo();
+    }
+    @GetMapping("/lista/publicznosc")
+    public List<UkrainaUczniowie> getListedByPublicznosc() {
+        return ukrainaUczniowieService.getListedByPublicznosc();
+    }
+    @GetMapping("/lista/typ")
+    public List<UkrainaUczniowie> getAllByTyp() {
+        return ukrainaUczniowieService.getAllByTyp();
+    }
+    @GetMapping("/lista")
+    public List<UkrainaUczniowie> getPowiatByWojewodztwo(
+            @RequestParam(required = false) Integer wojewodztwo) {
+        return ukrainaUczniowieService.getPowiatByWojewodztwo(wojewodztwo);
 
+    }
 }

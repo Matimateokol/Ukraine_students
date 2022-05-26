@@ -29,7 +29,7 @@
                 <label >Wybierz województwo</label>
                 <select  th:name="wojewodztwo" id="wojewodztwo"  class="form-control">
                     <option value="0">---</option>
-                    <option th:each="student: ${students}" th:value="${student.idTerytWojewodztwo}" th:text="${student.getWojewodztwo}"></option>
+                    <option th:each="woj: ${wojewodztwa}" th:value="${woj.idTerytWojewodztwo}" th:text="${woj.getWojewodztwo}"></option>
                 </select>
                 <label >Wybierz powiat</label>
                 <select th:name="powiat" id="powiat" class="form-control">
@@ -40,15 +40,12 @@
                 <label >Wybierz publiczność szkoły</label>
                 <select th:name="publicznosc" class="form-control">
                     <option value="0">---</option>
-                    <option th:each="student: ${students}" th:value="${student.idPublicznosc}" th:text="${student.getPublicznosc}"></option>
-                    <option value="1">Publiczna</option>
-                    <option value="4">Niepubliczna</option>
-                    <option value="5">Niepubliczna szkoła artystyczna o uprawnieniach publicznej szkoły artystycznej</option>
+                    <option th:each="publicznosc: ${publicznosci}" th:value="${publicznosc.idPublicznosc}" th:text="${publicznosc.getPublicznosc}"></option>
                 </select>
                 <label >Wybierz rodzaj szkoly</label>
                 <select th:name="podmiot" class="form-control">
                     <option value="0">---</option>
-                    <option th:each="student: ${students}" th:value="${student.idTypPodmiotu}" th:text="${student.getTypPodmiotu}"></option>
+                    <option th:each="typ: ${typy}" th:value="${typ.idTypPodmiotu}" th:text="${typ.getTypPodmiotu}"></option>
                 </select>
             </div>
             <div class="d-grid gap-2">
