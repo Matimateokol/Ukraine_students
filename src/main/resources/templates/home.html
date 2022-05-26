@@ -29,11 +29,7 @@
                 <label >Wybierz województwo</label>
                 <select  th:name="wojewodztwo" id="wojewodztwo"  class="form-control">
                     <option value="0">---</option>
-                    <option value="2">Dolnośląskie</option>
-                    <option value="4">Kujawsko-Pomorskie</option>
-                    <option value="6">Lubelskie</option>
-                    <option value="8">Lubuskie</option>
-                    <option value="10">Łódzkie</option>
+                    <option th:each="student: ${students}" th:value="${student.idTerytWojewodztwo}" th:text="${student.getWojewodztwo}"></option>
                 </select>
                 <label >Wybierz powiat</label>
                 <select th:name="powiat" id="powiat" class="form-control">
@@ -44,6 +40,7 @@
                 <label >Wybierz publiczność szkoły</label>
                 <select th:name="publicznosc" class="form-control">
                     <option value="0">---</option>
+                    <option th:each="student: ${students}" th:value="${student.idPublicznosc}" th:text="${student.getPublicznosc}"></option>
                     <option value="1">Publiczna</option>
                     <option value="4">Niepubliczna</option>
                     <option value="5">Niepubliczna szkoła artystyczna o uprawnieniach publicznej szkoły artystycznej</option>
@@ -51,11 +48,7 @@
                 <label >Wybierz rodzaj szkoly</label>
                 <select th:name="podmiot" class="form-control">
                     <option value="0">---</option>
-                    <option value="3">Szkoła Podstawowa</option>
-                    <option value="1">Przedszkole</option>
-                    <option value="14">Liceum ogólnokształczące</option>
-                    <option value="16">Technikum</option>
-
+                    <option th:each="student: ${students}" th:value="${student.idTypPodmiotu}" th:text="${student.getTypPodmiotu}"></option>
                 </select>
             </div>
             <div class="d-grid gap-2">
