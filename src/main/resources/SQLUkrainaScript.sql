@@ -166,3 +166,21 @@ grant exec on pokaz_wojewodztwo to UserOdczyt
 
 drop procedure pokaz_wojewodztwo
 exec pokaz_wojewodztwo 2
+
+
+--TABELA USER
+use Ukraina_Uczniowie
+
+CREATE TABLE users (
+id int PRIMARY KEY,
+active BIT,
+roles varchar(255),
+usersName varchar(255),
+passwor varchar(50)    --trzeba przejœæ do users -> Design -> i zmienic passwor na password
+)
+insert into users values (
+1,'1','ROLE_USER','username','pass'
+)
+
+
+select * from users
