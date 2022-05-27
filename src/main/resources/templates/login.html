@@ -16,6 +16,9 @@
 
     <div class="border border-secondary p-3 rounded">
       <h1 class="h5 fw-bold">Przeglądarka informacji o ukraińskich uczniach</h1>
+      <div th:if="${param.error}" class="alert alert-error text-danger fw-bold">
+        Niepoprawne dane do logowania
+      </div>
       <p>
         <input type="username" name="username" class="form-control" placeholder="Username" required autofocus/>
       </p>
