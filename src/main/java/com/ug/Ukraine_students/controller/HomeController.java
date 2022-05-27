@@ -23,6 +23,18 @@ public class HomeController {
         List<UkrainaUczniowie> students = ukrainaUczniowieService
                 .getAllByParams(0,0,0,0);
         model.addAttribute("students", students);
+        List<UkrainaUczniowie> wojewodztwa = ukrainaUczniowieService
+                .getListedByWojewodztwo();
+        model.addAttribute("wojewodztwa", wojewodztwa);
+        List<UkrainaUczniowie> publicznosci = ukrainaUczniowieService
+                .getListedByPublicznosc();
+        model.addAttribute("publicznosci", publicznosci);
+        List<UkrainaUczniowie> typy = ukrainaUczniowieService
+                .getAllByTyp();
+        model.addAttribute("typy", typy);
+        List<UkrainaUczniowie> powiaty = ukrainaUczniowieService
+                .getPowiatByWojewodztwo(0);
+        model.addAttribute("powiaty", powiaty);
         return "home";
     }
 
@@ -45,6 +57,18 @@ public class HomeController {
             Model model) {
         List<UkrainaUczniowie> studentsByParams = ukrainaUczniowieService.getAllByParams(wojewodztwo, powiat, publicznosc, podmiot);
         model.addAttribute("students", studentsByParams);
+        List<UkrainaUczniowie> wojewodztwa = ukrainaUczniowieService
+                .getListedByWojewodztwo();
+        model.addAttribute("wojewodztwa", wojewodztwa);
+        List<UkrainaUczniowie> publicznosci = ukrainaUczniowieService
+                .getListedByPublicznosc();
+        model.addAttribute("publicznosci", publicznosci);
+        List<UkrainaUczniowie> typy = ukrainaUczniowieService
+                .getAllByTyp();
+        model.addAttribute("typy", typy);
+        List<UkrainaUczniowie> powiaty = ukrainaUczniowieService
+                .getPowiatByWojewodztwo(0);
+        model.addAttribute("powiaty", powiaty);
         return "home";
     }
 

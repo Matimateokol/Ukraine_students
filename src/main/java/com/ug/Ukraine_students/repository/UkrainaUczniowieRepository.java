@@ -21,4 +21,14 @@ public interface UkrainaUczniowieRepository extends JpaRepository<UkrainaUczniow
 
     @Query(value = "exec pokaz_szkoly_all ?, ?, ?, ?;", nativeQuery = true)
     List<UkrainaUczniowie> findAllByParams(Integer idTerytWojewodztwo, Integer idTerytPowiat, Integer idPublicznosc, Integer idTypPodmiotu);
+
+    @Query(value = "exec lista_wojewodztwo ;", nativeQuery = true)
+    List<UkrainaUczniowie> findListedByWojewodztwo();
+    @Query(value = "exec pokaz_wojewodztwo ?;", nativeQuery = true)
+    List<UkrainaUczniowie> findPowiatByWojewodztwo(int idTerytWojewodztwo);
+    @Query(value = "exec lista_publicznosc ;", nativeQuery = true)
+    List<UkrainaUczniowie> findListedByPublicznosc();
+    @Query(value = "exec lista_typ ;", nativeQuery = true)
+    List<UkrainaUczniowie> findAllByTyp();
+
 }

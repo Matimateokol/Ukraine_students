@@ -36,5 +36,20 @@ public class UkrainaUczniowieService implements IUkrainaUczniowieService {
         Integer podmiot = idTypPodmiotu != null ? idTypPodmiotu : 0;
         return ukrainaUczniowieRepository.findAllByParams(wojewodztwo, powiat, publicznosc, podmiot);
     }
-
+    @Override
+    public List<UkrainaUczniowie> getListedByWojewodztwo() {
+        return ukrainaUczniowieRepository.findListedByWojewodztwo();
+    }
+    @Override
+    public List<UkrainaUczniowie> getPowiatByWojewodztwo(int idTerytWojewodztwo) {
+        return ukrainaUczniowieRepository.findPowiatByWojewodztwo(idTerytWojewodztwo);
+    }
+    @Override
+    public List<UkrainaUczniowie> getListedByPublicznosc() {
+        return ukrainaUczniowieRepository.findListedByPublicznosc();
+    }
+    @Override
+    public List<UkrainaUczniowie> getAllByTyp() {
+        return ukrainaUczniowieRepository.findAllByTyp();
+    }
 }

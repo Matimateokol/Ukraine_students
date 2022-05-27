@@ -9,4 +9,9 @@ public interface IUkrainaUczniowieService {
     List<UkrainaUczniowie> getAllStudents();
     List<UkrainaUczniowie> getAllFromPowiat(int idPowiat);
     List<UkrainaUczniowie> getAllByParams(Integer idTerytWojewodztwo, Integer idTerytPowiat, Integer idPublicznosc, Integer idTypPodmiotu);
+    List<UkrainaUczniowie> getListedByWojewodztwo();
+    List<UkrainaUczniowie> getPowiatByWojewodztwo(int idTerytWojewodztwo);
+    List<UkrainaUczniowie> getListedByPublicznosc();
+    List<UkrainaUczniowie> getAllByTyp();
+
 }
