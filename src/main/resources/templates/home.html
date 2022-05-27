@@ -17,11 +17,11 @@
         <img class="d-block mx-auto mb-4" src="https://seeklogo.com/images/S/spring-logo-9A2BC78AAF-seeklogo.com.png" alt="" width="80" height="80">
         <h1 class="display-5 fw-bold">Przeglądarka informacji o ukraińskich uczniach</h1>
         <div class="col-lg-8 mx-auto">
-            <p class="lead">Jest to aplikacja bazodanowa stworzna przy wykorzystaniu bazy danych MSSQL, środowiska InteliJ IDE, frameworka Spring. Ma ona na celu przefiltrowanie dostępnych publicznie danych o ukraińskich uczniach uczących się w polskich szkołach. Dant pochodzą z dane.gov.pl z dnia 15 maja.  </p>
+            <p class="lead">Jest to aplikacja bazodanowa stworzona przy wykorzystaniu bazy danych MSSQL, środowiska InteliJ IDE, frameworka Spring. Ma ona na celu przefiltrowanie dostępnych publicznie danych o ukraińskich uczniach uczących się w polskich szkołach. Dane pochodzą z dane.gov.pl z dnia 15 maja.  </p>
         </div>
     </div>
     <div>
-        <form th:action="@{/}" method="get">
+        <form th:action="@{/1}" method="get">
             <div class="form-group">
                 <label >Wybierz województwo</label>
                 <select  th:name="wojewodztwo" id="wojewodztwo"  class="form-control">
@@ -61,7 +61,6 @@
                     <th scope="col">Liczba szkol</th>
                     <th scope="col">Liczba ukraińskich uczniów</th>
                     <th scope="col">Z dodatkową nauką polskiego</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -76,8 +75,32 @@
                 </tr>
             </tbody>
         </table>
+
+        <!-- pagination -->
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/' + ${currentPage + 1}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/' + ${totalPages}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+                <div class = "col-sm-1">
+                    <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+                        <a th:if="${currentPage != i}" th:href="@{'/' + ${i}}">[[${i}]]</a>
+                        <span th:unless="${currentPage != i}">[[${i}]]</span>
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<!-- decide whereas to change it in any case -->
 <div class="container">
     <footer class="py-3 my-4">
         <img class="image" src="https://samorzad.gov.pl/photo/d98952cf-376f-4bdc-bc4f-0c9167c6127c">

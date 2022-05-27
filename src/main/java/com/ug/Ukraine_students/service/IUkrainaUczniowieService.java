@@ -14,4 +14,5 @@ public interface IUkrainaUczniowieService {
     List<UkrainaUczniowie> getListedByPublicznosc();
     List<UkrainaUczniowie> getAllByTyp();
 
+    List<UkrainaUczniowie> getAllStudentsPaginated(Integer pageNo, Integer pageSize);
 }

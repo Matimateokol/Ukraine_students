@@ -4,7 +4,6 @@ import com.ug.Ukraine_students.domain.UkrainaUczniowie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +20,14 @@ public interface UkrainaUczniowieRepository extends JpaRepository<UkrainaUczniow
 
     @Query(value = "exec pokaz_szkoly_all ?, ?, ?, ?;", nativeQuery = true)
     List<UkrainaUczniowie> findAllByParams(Integer idTerytWojewodztwo, Integer idTerytPowiat, Integer idPublicznosc, Integer idTypPodmiotu);
+
+    @Procedure(name = "pokaz_szkoly_all")
+    List<UkrainaUczniowie> findAllPaginated(
+            @Param("idTerytWojewodztwo") Integer idTerytWojewodztwo,
+            @Param("idTerytPowiat") Integer idTerytPowiat,
+            @Param("idPublicznosc") Integer idPublicznosc,
+            @Param("idTypPodmiotu") Integer idTypPodmiotu
+    );
 
     @Query(value = "exec lista_wojewodztwo ;", nativeQuery = true)
     List<UkrainaUczniowie> findListedByWojewodztwo();

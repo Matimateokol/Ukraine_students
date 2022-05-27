@@ -1,10 +1,7 @@
 package com.ug.Ukraine_students.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +10,17 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Table(name = "Ukraina_Uczniowie", schema = "dbo")
+@NamedStoredProcedureQuery(
+        name="pokaz_szkoly_all",
+        procedureName="pokaz_szkoly_all",
+        resultClasses = { UkrainaUczniowie.class },
+        parameters={
+                @StoredProcedureParameter(name="idTerytWojewodztwo", type=Integer.class, mode=ParameterMode.IN),
+                @StoredProcedureParameter(name="idTerytPowiat", type=Integer.class, mode=ParameterMode.IN),
+                @StoredProcedureParameter(name="idPublicznosc", type=Integer.class, mode=ParameterMode.IN),
+                @StoredProcedureParameter(name="idTypPodmiotu", type=Integer.class, mode=ParameterMode.IN)
+        }
+)
 public class UkrainaUczniowie implements Serializable {
 
     @Serial
