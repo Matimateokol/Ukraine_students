@@ -26,6 +26,11 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/user")
+    public String user(){
+        return ("home");
+    }
+
     @RequestMapping("/")
     public String index(
             @RequestParam(required = false) Integer wojewodztwo,
