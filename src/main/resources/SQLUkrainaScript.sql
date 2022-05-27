@@ -167,6 +167,61 @@ grant exec on pokaz_wojewodztwo to UserOdczyt
 drop procedure pokaz_wojewodztwo
 exec pokaz_wojewodztwo 2
 
+--PROCEDURA SELECT DLA LIST FRONTENDOWYCH
+
+create procedure pokaz_wojewodztwo
+@idTerytWojewodztwo float
+as
+begin
+	if @idTerytWojewodztwo=0
+		begin
+			select * from Ukraina_Uczniowie u
+			inner join (select MIN(ID) as maxID from Ukraina_Uczniowie
+			group by idTerytPowiat )
+			ma on  ma.maxID=u.ID
+			order by 1
+		end
+	else
+		begin
+			select * from Ukraina_Uczniowie u
+			inner join (select MIN(ID) as maxID from Ukraina_Uczniowie
+			where idTerytWojewodztwo=@idTerytWojewodztwo  group by idTerytPowiat )
+			ma on  ma.maxID=u.ID
+			order by 1
+		end
+end
+go
+
+create procedure lista_wojewodztwo
+as
+select * from Ukraina_Uczniowie u
+inner join (select MIN(ID) as maxID from Ukraina_Uczniowie  group by idTerytWojewodztwo )
+ma on  ma.maxID=u.ID
+order by 1
+go
+
+create procedure lista_publicznosc
+as
+select * from Ukraina_Uczniowie u
+inner join (select MIN(ID) as maxID from Ukraina_Uczniowie  group by idPublicznosc )
+ma on  ma.maxID=u.ID
+order by 1
+go
+
+create procedure lista_typ
+as
+select * from Ukraina_Uczniowie u
+inner join (select MIN(ID) as maxID from Ukraina_Uczniowie  group by idTypPodmiotu )
+ma on  ma.maxID=u.ID
+order by 1
+go
+
+grant exec on lista_wojewodztwo to UserOdczyt
+grant exec on lista_publicznosc to UserOdczyt
+grant exec on lista_typ to UserOdczyt
+grant exec on pokaz_wojewodztwo to UserOdczyt
+
+
 
 --TABELA USER
 use Ukraina_Uczniowie
@@ -176,7 +231,7 @@ id int PRIMARY KEY,
 active BIT,
 roles varchar(255),
 usersName varchar(255),
-passwor varchar(50)    --trzeba przejœæ do users -> Design -> i zmienic passwor na password
+password varchar(50)    --trzeba przejœæ do users -> Design -> i zmienic passwor na password
 )
 insert into users values (
 1,'1','ROLE_USER','username','pass'
