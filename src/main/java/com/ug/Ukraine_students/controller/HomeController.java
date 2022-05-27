@@ -31,6 +31,11 @@ public class HomeController {
         return ("home");
     }
 
+    @GetMapping("/welcome")
+    public String welcome(){
+        return ("welcome");
+    }
+
     @RequestMapping("/")
     public String index(
             @RequestParam(required = false) Integer wojewodztwo,
@@ -42,4 +47,5 @@ public class HomeController {
         model.addAttribute("students", studentsByParams);
         return "home";
     }
+
 }
